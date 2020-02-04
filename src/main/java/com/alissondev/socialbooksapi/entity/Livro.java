@@ -22,6 +22,13 @@ public class Livro {
 	public Long getId() {
 		return id;
 	}
+	
+	public Livro() {		
+	}	
+
+	public Livro(String nome) {		
+		this.nome = nome;
+	}
 
 	public void setId(Long id) {
 		this.id = id;
