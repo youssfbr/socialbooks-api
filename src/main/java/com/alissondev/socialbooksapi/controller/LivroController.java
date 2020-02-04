@@ -45,4 +45,9 @@ public class LivroController {
 	public Livro salvar(@RequestBody Livro livro) {
 		return livrosRepository.save(livro);
 	}
+	
+	@DeleteMapping("/{id}")
+	public void deletar(@PathVariable Long id) {
+		livrosRepository.deleteById(id);
+	}	
 }
