@@ -65,8 +65,10 @@ public class LivroController {
 	}	
 	
 	@PutMapping("/{id}")
-	public void atualizar(@RequestBody Livro livro, @PathVariable Long id) {
+	public ResponseEntity<Void> atualizar(@RequestBody Livro livro, @PathVariable Long id) {
 		livro.setId(id);
 		livrosRepository.save(livro);
+		
+		return ResponseEntity.noContent().build();
 	}
 }
