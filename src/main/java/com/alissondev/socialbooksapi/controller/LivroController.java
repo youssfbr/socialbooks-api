@@ -1,5 +1,6 @@
 package com.alissondev.socialbooksapi.controller;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.alissondev.socialbooksapi.entity.Livro;
 import com.alissondev.socialbooksapi.repository.LivrosRepository;
@@ -41,10 +43,13 @@ public class LivroController {
 		return ResponseEntity.ok(livro.get());
 	}
 	
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public Livro salvar(@RequestBody Livro livro) {
-		return livrosRepository.save(livro);
+	@PostMapping	
+	public ResponseEntity<Void> salvar(@RequestBody Livro livro) {
+		livro = livrosRepository.save(livro);
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livro.getId()).toUri();
+		
+		return ResponseEntity.created(uri).build();
 	}
 	
 	@DeleteMapping("/{id}")
