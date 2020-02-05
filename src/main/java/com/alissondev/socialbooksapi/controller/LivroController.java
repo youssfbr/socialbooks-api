@@ -29,8 +29,8 @@ public class LivroController {
 	private LivrosRepository livrosRepository;
  
 	@GetMapping
-	public List<Livro> listar() {		
-		return livrosRepository.findAll();
+	public ResponseEntity<List<Livro>> listar() {		
+		return ResponseEntity.ok().body(livrosRepository.findAll());
 	}
 	
 	@GetMapping("/{id}")
